@@ -1,13 +1,18 @@
 package com.berkay22demirel.buybetuserboard.controller;
 
+import com.berkay22demirel.buybetuserboard.constant.ResponseStatus;
+import com.berkay22demirel.buybetuserboard.controller.response.Response;
 import com.berkay22demirel.buybetuserboard.model.User;
 import com.berkay22demirel.buybetuserboard.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("api/1.0/users")
@@ -22,8 +27,9 @@ public class UserController {
     }
 
     @PostMapping
-    public void signup(@RequestBody User user) {
+    public ResponseEntity<?> signup(@Valid @RequestBody User user) {
         logger.info(user.toString());
         userService.create(user);
+        return ResponseEntity.ok(new Response(ResponseStatus.SUCCESS.getValue()));
     }
 }

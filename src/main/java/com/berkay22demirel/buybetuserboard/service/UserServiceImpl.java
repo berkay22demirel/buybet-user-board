@@ -2,25 +2,22 @@ package com.berkay22demirel.buybetuserboard.service;
 
 import com.berkay22demirel.buybetuserboard.model.User;
 import com.berkay22demirel.buybetuserboard.repository.UserRepository;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final CryptService cryptService;
 
-    private final PasswordEncoder passwordEncoder;
-
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, CryptService cryptService) {
         this.userRepository = userRepository;
-        this.passwordEncoder = new BCryptPasswordEncoder();
+        this.cryptService = cryptService;
     }
 
     @Override
     public void create(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPassword(cryptService.encode(user.getPassword()));
         userRepository.save(user);
     }
 }
