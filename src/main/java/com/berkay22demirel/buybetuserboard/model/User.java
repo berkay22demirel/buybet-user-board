@@ -33,13 +33,13 @@ public class User {
     private String email;
 
     @NotNull
-    @Pattern(regexp = "(^$|[0-9]{10})")
+    @Pattern(message = "{buybet.validation.constraints.Pattern.phone.message}", regexp = "(^$|[0-9]{10})")
     @Column(name = "phone", nullable = false)
     private String phone;
 
     @NotNull
     @Size(min = 8, max = 32)
-    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}$")
+    @Pattern(message = "{buybet.validation.constraints.Pattern.password.message}", regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}$")
     @Column(name = "password", nullable = false)
     private String password;
 }
