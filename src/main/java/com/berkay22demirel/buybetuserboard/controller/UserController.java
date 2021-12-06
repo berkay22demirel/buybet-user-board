@@ -28,8 +28,7 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<?> signup(@Valid @RequestBody User user) {
-        logger.info(user.toString());
         userService.create(user);
-        return ResponseEntity.ok(new Response(ResponseStatus.SUCCESS.getValue()));
+        return ResponseEntity.ok(new Response(ResponseStatus.SUCCESS));
     }
 }

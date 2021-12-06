@@ -1,6 +1,6 @@
 package com.berkay22demirel.buybetuserboard.constant;
 
-public enum ResponseStatus {
+public enum ResponseStatus implements BasicEnum<String> {
 
     SUCCESS("success"),
     FAILURE("failure");
@@ -11,7 +11,9 @@ public enum ResponseStatus {
         this.value = value;
     }
 
+    @Override
     public String getValue() {
         return value;
     }
+    
 }
