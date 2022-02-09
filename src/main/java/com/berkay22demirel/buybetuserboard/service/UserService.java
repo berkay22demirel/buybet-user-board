@@ -10,4 +10,5 @@ public interface UserService {
 
     Optional<User> getByUsername(String username);
 
+    void updateUser(String username, String email, String image);
 }

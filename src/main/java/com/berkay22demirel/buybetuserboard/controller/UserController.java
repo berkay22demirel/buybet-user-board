@@ -38,4 +38,10 @@ public class UserController {
                 .orElseThrow(() -> new BuybetNotFoundException("buybet.user.notFound"));
     }
 
+    @PutMapping("{username}")
+    public ResponseEntity<Response> updateUser(@PathVariable String username, @RequestBody UpdateUserRequest request) {
+        userService.updateUser(username, request.getEmail(), request.getImage());
+        return ResponseEntity.ok(new Response(ResponseStatus.SUCCESS));
+    }
+
 }
