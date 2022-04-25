@@ -9,10 +9,12 @@ public class UserDto {
     private String username;
     private String email;
     private String phone;
+    private String image;
 
     public UserDto(User user) {
         this.username = user.getUsername();
         this.email = user.getEmail();
         this.phone = user.getPhone();
+        this.image = user.getImage();
     }
 }
