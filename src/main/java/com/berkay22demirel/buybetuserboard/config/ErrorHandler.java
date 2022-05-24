@@ -32,7 +32,7 @@ public class ErrorHandler implements ErrorController {
     private Map<String, String> getErrors(Map<String, Object> errorAttributes) {
         if (errorAttributes.containsKey("errors")) {
             List<FieldError> fieldErrorList = (List<FieldError>) errorAttributes.get("errors");
-            return fieldErrorList.stream().collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
+            return fieldErrorList.stream().collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage, (message1, message2) -> message1 + ", " + message2));
         }
         return null;
     }

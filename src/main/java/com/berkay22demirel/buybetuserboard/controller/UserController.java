@@ -2,6 +2,7 @@ package com.berkay22demirel.buybetuserboard.controller;
 
 import com.berkay22demirel.buybetuserboard.constant.ResponseStatus;
 import com.berkay22demirel.buybetuserboard.controller.dto.UserDto;
+import com.berkay22demirel.buybetuserboard.controller.request.UpdateUserRequest;
 import com.berkay22demirel.buybetuserboard.controller.response.Response;
 import com.berkay22demirel.buybetuserboard.exception.BuybetNotFoundException;
 import com.berkay22demirel.buybetuserboard.model.User;
@@ -39,7 +40,7 @@ public class UserController {
     }
 
     @PutMapping("{username}")
-    public ResponseEntity<Response> updateUser(@PathVariable String username, @RequestBody UpdateUserRequest request) {
+    public ResponseEntity<Response> updateUser(@PathVariable String username, @Valid @RequestBody UpdateUserRequest request) {
         User user = userService.updateUser(username, request.getEmail(), request.getImage());
         return ResponseEntity.ok(new Response(new UserDto(user)));
     }
