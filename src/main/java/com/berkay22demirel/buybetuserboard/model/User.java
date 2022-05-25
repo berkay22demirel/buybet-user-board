@@ -1,5 +1,6 @@
 package com.berkay22demirel.buybetuserboard.model;
 
+import com.berkay22demirel.buybetuserboard.annotations.ImageValidation;
 import com.berkay22demirel.buybetuserboard.constant.AuthorityRole;
 import lombok.Getter;
 import lombok.Setter;
@@ -47,6 +48,7 @@ public class User implements UserDetails {
     @Column(name = "password", nullable = false)
     private String password;
 
+    @ImageValidation
     @Column(name = "image")
     private String image;
 
