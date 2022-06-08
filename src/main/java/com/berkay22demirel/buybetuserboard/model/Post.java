@@ -19,7 +19,7 @@ public class Post {
 
     @Column(name = "update_date")
     private Date updateDate;
-    
+
     @Column(nullable = false, length = 210)
     private String content;
 }
