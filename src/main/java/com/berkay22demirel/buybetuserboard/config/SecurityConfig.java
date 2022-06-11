@@ -31,8 +31,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.httpBasic().authenticationEntryPoint(new AuthenticationEntryPoint());
         http.authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/api/1.0/auth").authenticated()
-                //.antMatchers(HttpMethod.PUT, "/api/1.0/users/{username}").authenticated()
-                //.antMatchers(HttpMethod.POST, "/api/1.0/posts").authenticated()
+                .antMatchers(HttpMethod.PUT, "/api/1.0/users/{username}").authenticated()
+                .antMatchers(HttpMethod.POST, "/api/1.0/posts").authenticated()
                 .and().authorizeRequests().anyRequest().permitAll();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }

@@ -18,21 +18,27 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("api/1.0/posts")
+@RequestMapping("api/1.0")
 @RequiredArgsConstructor
 public class PostController {
 
     private final PostService postService;
 
-    @PostMapping
+    @PostMapping("/posts")
     public ResponseEntity<Response> create(@Valid @RequestBody CreatePostRequest request, @CurrentUser User user) {
         postService.create(request.getContent(), user);
         return ResponseEntity.ok(new Response(ResponseStatus.SUCCESS));
     }
 
-    @GetMapping
+    @GetMapping("/posts")
     public ResponseEntity<Response> getPosts(@PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
         Page<PostDto> postList = postService.getPosts(pageable);
+        return ResponseEntity.ok(new Response(postList));
+    }
+
+    @GetMapping("/users/{username}/posts")
+    public ResponseEntity<Response> getPostsByUser(@PathVariable String username, @PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+        Page<PostDto> postList = postService.getPostsByUser(username, pageable);
         return ResponseEntity.ok(new Response(postList));
     }
 }

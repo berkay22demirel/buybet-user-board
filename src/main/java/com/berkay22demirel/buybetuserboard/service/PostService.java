@@ -10,4 +10,6 @@ public interface PostService {
     void create(String content, User user);
 
     Page<PostDto> getPosts(Pageable pageable);
+
+    Page<PostDto> getPostsByUser(String username, Pageable pageable);
 }
