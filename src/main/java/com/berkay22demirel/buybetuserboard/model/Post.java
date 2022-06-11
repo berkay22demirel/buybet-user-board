@@ -11,7 +11,7 @@ import java.util.Date;
 public class Post {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "insert_date", nullable = false)
@@ -22,4 +22,8 @@ public class Post {
 
     @Column(nullable = false, length = 210)
     private String content;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false, nullable = false)
+    private User user;
 }

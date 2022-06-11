@@ -1,9 +1,11 @@
 package com.berkay22demirel.buybetuserboard.controller;
 
+import com.berkay22demirel.buybetuserboard.annotations.CurrentUser;
 import com.berkay22demirel.buybetuserboard.constant.ResponseStatus;
 import com.berkay22demirel.buybetuserboard.controller.dto.PostDto;
 import com.berkay22demirel.buybetuserboard.controller.request.CreatePostRequest;
 import com.berkay22demirel.buybetuserboard.controller.response.Response;
+import com.berkay22demirel.buybetuserboard.model.User;
 import com.berkay22demirel.buybetuserboard.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -23,8 +25,8 @@ public class PostController {
     private final PostService postService;
 
     @PostMapping
-    public ResponseEntity<Response> create(@Valid @RequestBody CreatePostRequest request) {
-        postService.create(request.getContent());
+    public ResponseEntity<Response> create(@Valid @RequestBody CreatePostRequest request, @CurrentUser User user) {
+        postService.create(request.getContent(), user);
         return ResponseEntity.ok(new Response(ResponseStatus.SUCCESS));
     }
 

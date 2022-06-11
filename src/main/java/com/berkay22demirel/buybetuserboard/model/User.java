@@ -1,6 +1,5 @@
 package com.berkay22demirel.buybetuserboard.model;
 
-import com.berkay22demirel.buybetuserboard.annotations.ImageValidation;
 import com.berkay22demirel.buybetuserboard.constant.AuthorityRole;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,7 +23,7 @@ import java.util.Collection;
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
@@ -48,7 +47,6 @@ public class User implements UserDetails {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @ImageValidation
     @Column(name = "image")
     private String image;
 
