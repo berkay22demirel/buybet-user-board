@@ -46,4 +46,11 @@ public class PostServiceImpl implements PostService {
     public Page<PostDto> getPostsScroll(long lastId, Pageable pageable) {
         return postRepository.findByIdLessThan(lastId, pageable).map(PostDto::new);
     }
+
+    @Override
+    public Page<PostDto> getPostsByUserAndScroll(String username, long lastId, Pageable pageable) {
+        User user = userService.getByUsername(username)
+                .orElseThrow(() -> new BuybetNotFoundException("buybet.user.notFound"));
+        return postRepository.findByUserAndIdLessThan(user, lastId, pageable).map(PostDto::new);
+    }
 }
