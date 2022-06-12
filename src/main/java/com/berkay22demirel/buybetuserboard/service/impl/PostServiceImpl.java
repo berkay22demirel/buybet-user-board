@@ -41,4 +41,9 @@ public class PostServiceImpl implements PostService {
                 .orElseThrow(() -> new BuybetNotFoundException("buybet.user.notFound"));
         return postRepository.findByUser(user, pageable).map(PostDto::new);
     }
+
+    @Override
+    public Page<PostDto> getPostsScroll(long lastId, Pageable pageable) {
+        return postRepository.findByIdLessThan(lastId, pageable).map(PostDto::new);
+    }
 }

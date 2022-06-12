@@ -36,6 +36,12 @@ public class PostController {
         return ResponseEntity.ok(new Response(postList));
     }
 
+    @GetMapping("/posts/{lastId:[0-9]+}")
+    public ResponseEntity<Response> getPostsByScroll(@PathVariable long lastId, @PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+        Page<PostDto> postList = postService.getPostsScroll(lastId, pageable);
+        return ResponseEntity.ok(new Response(postList));
+    }
+
     @GetMapping("/users/{username}/posts")
     public ResponseEntity<Response> getPostsByUser(@PathVariable String username, @PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
         Page<PostDto> postList = postService.getPostsByUser(username, pageable);

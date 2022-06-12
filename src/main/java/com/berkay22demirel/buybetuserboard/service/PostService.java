@@ -12,4 +12,6 @@ public interface PostService {
     Page<PostDto> getPosts(Pageable pageable);
 
     Page<PostDto> getPostsByUser(String username, Pageable pageable);
+
+    Page<PostDto> getPostsScroll(long lastId, Pageable pageable);
 }
