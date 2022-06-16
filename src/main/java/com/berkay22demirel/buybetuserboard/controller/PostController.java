@@ -2,6 +2,7 @@ package com.berkay22demirel.buybetuserboard.controller;
 
 import com.berkay22demirel.buybetuserboard.annotations.CurrentUser;
 import com.berkay22demirel.buybetuserboard.constant.ResponseStatus;
+import com.berkay22demirel.buybetuserboard.constant.ScrollDirectionEnum;
 import com.berkay22demirel.buybetuserboard.controller.dto.PostDto;
 import com.berkay22demirel.buybetuserboard.controller.request.CreatePostRequest;
 import com.berkay22demirel.buybetuserboard.controller.response.Response;
@@ -36,9 +37,9 @@ public class PostController {
         return ResponseEntity.ok(new Response(postList));
     }
 
-    @GetMapping("/posts/{lastId:[0-9]+}")
-    public ResponseEntity<Response> getPostsByScroll(@PathVariable long lastId, @PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
-        Page<PostDto> postList = postService.getPostsScroll(lastId, pageable);
+    @GetMapping("/posts/{id:[0-9]+}")
+    public ResponseEntity<Response> getPostsByScroll(@PathVariable long id, @RequestParam(name = "direction", defaultValue = "before") ScrollDirectionEnum direction, @PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+        Iterable<PostDto> postList = postService.getPostsScroll(id, pageable, direction);
         return ResponseEntity.ok(new Response(postList));
     }
 
@@ -48,9 +49,9 @@ public class PostController {
         return ResponseEntity.ok(new Response(postList));
     }
 
-    @GetMapping("/users/{username}/posts/{lastId:[0-9]+}")
-    public ResponseEntity<Response> getPostsByUser(@PathVariable String username, @PathVariable long lastId, @PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
-        Page<PostDto> postList = postService.getPostsByUserAndScroll(username, lastId, pageable);
+    @GetMapping("/users/{username}/posts/{id:[0-9]+}")
+    public ResponseEntity<Response> getPostsByUserAndScroll(@PathVariable String username, @PathVariable long id, @RequestParam(name = "direction", defaultValue = "before") ScrollDirectionEnum direction, @PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+        Iterable<PostDto> postList = postService.getPostsByUserAndScroll(username, id, pageable, direction);
         return ResponseEntity.ok(new Response(postList));
     }
 }

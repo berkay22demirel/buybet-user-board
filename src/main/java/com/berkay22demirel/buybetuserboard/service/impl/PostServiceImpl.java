@@ -1,5 +1,6 @@
 package com.berkay22demirel.buybetuserboard.service.impl;
 
+import com.berkay22demirel.buybetuserboard.constant.ScrollDirectionEnum;
 import com.berkay22demirel.buybetuserboard.controller.dto.PostDto;
 import com.berkay22demirel.buybetuserboard.exception.BuybetNotFoundException;
 import com.berkay22demirel.buybetuserboard.model.Post;
@@ -13,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
+import java.util.stream.Collectors;
 
 @Repository
 @RequiredArgsConstructor
@@ -43,14 +45,22 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Page<PostDto> getPostsScroll(long lastId, Pageable pageable) {
-        return postRepository.findByIdLessThan(lastId, pageable).map(PostDto::new);
+    public Iterable<PostDto> getPostsScroll(long id, Pageable pageable, ScrollDirectionEnum direction) {
+        if (ScrollDirectionEnum.after.equals(direction)) {
+            return postRepository.findByIdGreaterThan(id, pageable.getSort()).stream()
+                    .map(PostDto::new).collect(Collectors.toList());
+        }
+        return postRepository.findByIdLessThan(id, pageable).map(PostDto::new);
     }
 
     @Override
-    public Page<PostDto> getPostsByUserAndScroll(String username, long lastId, Pageable pageable) {
+    public Iterable<PostDto> getPostsByUserAndScroll(String username, long id, Pageable pageable, ScrollDirectionEnum direction) {
         User user = userService.getByUsername(username)
                 .orElseThrow(() -> new BuybetNotFoundException("buybet.user.notFound"));
-        return postRepository.findByUserAndIdLessThan(user, lastId, pageable).map(PostDto::new);
+        if (ScrollDirectionEnum.after.equals(direction)) {
+            return postRepository.findByUserAndIdGreaterThan(user, id, pageable.getSort()).stream()
+                    .map(PostDto::new).collect(Collectors.toList());
+        }
+        return postRepository.findByUserAndIdLessThan(user, id, pageable).map(PostDto::new);
     }
 }

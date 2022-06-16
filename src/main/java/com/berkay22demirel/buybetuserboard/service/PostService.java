@@ -1,5 +1,6 @@
 package com.berkay22demirel.buybetuserboard.service;
 
+import com.berkay22demirel.buybetuserboard.constant.ScrollDirectionEnum;
 import com.berkay22demirel.buybetuserboard.controller.dto.PostDto;
 import com.berkay22demirel.buybetuserboard.model.User;
 import org.springframework.data.domain.Page;
@@ -13,7 +14,7 @@ public interface PostService {
 
     Page<PostDto> getPostsByUser(String username, Pageable pageable);
 
-    Page<PostDto> getPostsScroll(long lastId, Pageable pageable);
+    Iterable<PostDto> getPostsScroll(long lastId, Pageable pageable, ScrollDirectionEnum direction);
 
-    Page<PostDto> getPostsByUserAndScroll(String username, long lastId, Pageable pageable);
+    Iterable<PostDto> getPostsByUserAndScroll(String username, long lastId, Pageable pageable, ScrollDirectionEnum direction);
 }
