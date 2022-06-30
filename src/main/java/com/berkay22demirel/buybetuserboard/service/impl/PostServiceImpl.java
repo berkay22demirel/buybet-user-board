@@ -63,4 +63,9 @@ public class PostServiceImpl implements PostService {
         }
         return postRepository.findByUserAndIdLessThan(user, id, pageable).map(PostDto::new);
     }
+
+    @Override
+    public void deletePost(long id) {
+        postRepository.deleteById(id);
+    }
 }

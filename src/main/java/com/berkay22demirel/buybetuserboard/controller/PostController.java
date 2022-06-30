@@ -54,4 +54,10 @@ public class PostController {
         Iterable<PostDto> postList = postService.getPostsByUserAndScroll(username, id, pageable, direction);
         return ResponseEntity.ok(new Response(postList));
     }
+
+    @DeleteMapping("/posts/{id:[0-9]+}")
+    public ResponseEntity<Response> deletePost(@PathVariable long id) {
+        postService.deletePost(id);
+        return ResponseEntity.ok(new Response(ResponseStatus.SUCCESS));
+    }
 }
