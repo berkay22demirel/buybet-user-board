@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -56,6 +57,7 @@ public class PostController {
     }
 
     @DeleteMapping("/posts/{id:[0-9]+}")
+    @PreAuthorize("@postServiceImpl.isAllowedToDeletePost(#id, principal)")
     public ResponseEntity<Response> deletePost(@PathVariable long id) {
         postService.deletePost(id);
         return ResponseEntity.ok(new Response(ResponseStatus.SUCCESS));

@@ -10,6 +10,7 @@ import com.berkay22demirel.buybetuserboard.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -40,6 +41,7 @@ public class UserController {
     }
 
     @PutMapping("{username}")
+    @PreAuthorize("#username == principal.username")
     public ResponseEntity<Response> updateUser(@PathVariable String username, @Valid @RequestBody UpdateUserRequest request) {
         User user = userService.updateUser(username, request.getEmail(), request.getImage());
         return ResponseEntity.ok(new Response(new UserDto(user)));

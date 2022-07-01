@@ -68,4 +68,10 @@ public class PostServiceImpl implements PostService {
     public void deletePost(long id) {
         postRepository.deleteById(id);
     }
+
+    @Override
+    public boolean isAllowedToDeletePost(long postId, User user) {
+        return postRepository.findById(postId).stream()
+                .anyMatch(post -> post.getUser().getId().equals(user.getId()));
+    }
 }

@@ -19,4 +19,6 @@ public interface PostService {
     Iterable<PostDto> getPostsByUserAndScroll(String username, long lastId, Pageable pageable, ScrollDirectionEnum direction);
 
     void deletePost(long id);
+
+    boolean isAllowedToDeletePost(long postId, User user);
 }
