@@ -47,4 +47,12 @@ public class UserController {
         return ResponseEntity.ok(new Response(new UserDto(user)));
     }
 
+    @DeleteMapping("{username}")
+    @PreAuthorize("#username == principal.username")
+    public ResponseEntity<Response> deleteUser(@PathVariable String username) {
+        userService.deleteUser(username);
+        return ResponseEntity.ok(new Response(ResponseStatus.SUCCESS));
+    }
+
+
 }

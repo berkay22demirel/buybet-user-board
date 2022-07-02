@@ -41,4 +41,13 @@ public class UserServiceImpl implements UserService {
         }
         return userRepository.save(user);
     }
+
+    @Override
+    public void deleteUser(String username) {
+        User user = userRepository.findByUsername(username).
+                orElseThrow(() -> new BuybetNotFoundException("buybet.user.notFound"));
+        String profileImage = user.getImage();
+        userRepository.delete(user);
+        userFileService.deleteProfileImage(profileImage);
+    }
 }

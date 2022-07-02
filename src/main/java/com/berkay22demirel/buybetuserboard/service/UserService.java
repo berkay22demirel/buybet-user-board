@@ -11,4 +11,6 @@ public interface UserService {
     Optional<User> getByUsername(String username);
 
     User updateUser(String username, String email, String image);
+
+    void deleteUser(String username);
 }
