@@ -1,4 +1,4 @@
-package com.berkay22demirel.buybetuserboard.controller.dto;
+package com.berkay22demirel.buybetuserboard.dto;
 
 import com.berkay22demirel.buybetuserboard.model.User;
 import lombok.Data;

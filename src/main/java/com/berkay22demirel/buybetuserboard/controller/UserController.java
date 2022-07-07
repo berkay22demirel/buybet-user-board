@@ -1,9 +1,9 @@
 package com.berkay22demirel.buybetuserboard.controller;
 
 import com.berkay22demirel.buybetuserboard.constant.ResponseStatus;
-import com.berkay22demirel.buybetuserboard.controller.dto.UserDto;
 import com.berkay22demirel.buybetuserboard.controller.request.UpdateUserRequest;
 import com.berkay22demirel.buybetuserboard.controller.response.Response;
+import com.berkay22demirel.buybetuserboard.dto.UserDto;
 import com.berkay22demirel.buybetuserboard.exception.BuybetNotFoundException;
 import com.berkay22demirel.buybetuserboard.model.User;
 import com.berkay22demirel.buybetuserboard.service.UserService;

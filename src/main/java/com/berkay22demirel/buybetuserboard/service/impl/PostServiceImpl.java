@@ -1,7 +1,7 @@
 package com.berkay22demirel.buybetuserboard.service.impl;
 
 import com.berkay22demirel.buybetuserboard.constant.ScrollDirectionEnum;
-import com.berkay22demirel.buybetuserboard.controller.dto.PostDto;
+import com.berkay22demirel.buybetuserboard.dto.PostDto;
 import com.berkay22demirel.buybetuserboard.exception.BuybetNotFoundException;
 import com.berkay22demirel.buybetuserboard.model.Post;
 import com.berkay22demirel.buybetuserboard.model.User;

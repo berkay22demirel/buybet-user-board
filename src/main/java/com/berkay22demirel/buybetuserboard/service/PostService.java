@@ -1,7 +1,7 @@
 package com.berkay22demirel.buybetuserboard.service;
 
 import com.berkay22demirel.buybetuserboard.constant.ScrollDirectionEnum;
-import com.berkay22demirel.buybetuserboard.controller.dto.PostDto;
+import com.berkay22demirel.buybetuserboard.dto.PostDto;
 import com.berkay22demirel.buybetuserboard.model.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

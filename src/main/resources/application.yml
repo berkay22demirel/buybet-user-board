@@ -21,3 +21,6 @@ spring:
 file:
   user:
     profile-image-path: profile-image-dev-storage
+security:
+  token:
+    secret: buybet-token-secret
